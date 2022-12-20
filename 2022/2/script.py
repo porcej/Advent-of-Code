@@ -8,9 +8,6 @@ win_points = 6
 draw_points = 3
 lose_points = 0
 
-			#   Lose, Draw, Win	
-_input_file = ["B X", "B Y", "B Z"]
-
 # Part 1 
 with open("input.txt", "r") as _input_file:
 	for line in _input_file:
@@ -35,7 +32,7 @@ with open("input.txt", "r") as _input_file:
 part_1 = p2_total
 
 
-# Part #2
+# Part 2
 p1_total = 0
 p2_total = 0
 
