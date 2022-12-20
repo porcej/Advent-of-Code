@@ -1,21 +1,20 @@
 # Part 1
-num_fully_contained = 0
+sum_priority = 0
+priority_map = {}
 
-test = [
-	"2-4,6-8",
-	"2-3,4-5",
-	"5-7,7-9",
-	"2-8,3-7",
-	"6-6,4-6",
-	"2-6,4-8"
-]
+counter = 1
+for idx in range(ord('a'), ord('z')+1):
+	priority_map[chr(idx)] = counter
+	counter += 1
 
+for idx in range(ord('A'), ord('Z')+1):
+	priority_map[chr(idx)] = counter
+	counter += 1
 
 
 with open("input.txt", "r") as _input_file:
 	for line in _input_file:
-		range1, range2 = line.split(",")
-		
+		compartment1, compartment2 = line[:len(line)//2], line[len(line)//2:]
 		chars = list(set(compartment1))
 		for char in chars:
 			if char in compartment2:
