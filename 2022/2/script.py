@@ -11,43 +11,50 @@ lose_points = 0
 			#   Lose, Draw, Win	
 _input_file = ["B X", "B Y", "B Z"]
 
+# Part 1 
 with open("input.txt", "r") as _input_file:
 	for line in _input_file:
 		p1 = ord(line[0]) - ord("A")
 		p2 = ord(line[2]) - ord("X")
-		print(p2)
 
 		# You win
 		if (p1 + 1) % 3 == p2:
-			print("You win")
 			p1_total += lose_points + p1 + 1
 			p2_total +=  win_points + p2 + 1
 
 		# Its a draw
 		elif p1 == p2:
-			print("Draw")
 			p1_total +=  draw_points + p1 + 1
 			p2_total +=  draw_points + p2 + 1
 
 		# Else your opponent wins
 		else:
-			print("Lose")
 			p1_total += win_points + p1 + 1
 			p2_total += lose_points + p2 + 1
 
-
-
-
-# with open("input.txt", "r") as _input_file:
-# 	for line in _input_file:
-# 		if line == "\n":
-# 			current_elf += 1
-# 			elves.append(0)
-# 		else:
-# 			elves[current_elf] += int(line)
-
 part_1 = p2_total
+
+
+# Part #2
+p1_total = 0
+p2_total = 0
+
+def win(x):
+	return (x + 1) % 3 + 1 + win_points
+
+def lose(x):
+	return (2 + x) % 3 + 1 + lose_points
+
+def draw(x):
+	return x + 1 + draw_points
+
+score_map = {'X': lose, 'Y': draw, 'Z': win}
+
+with open("input.txt", "r") as _input_file:
+	for line in _input_file:
+		p1 = ord(line[0]) - ord("A")
+		p2_total += score_map[line[2]](p1)
 print("Part 1: {}".format(part_1))
 
-part_2 = 2
+part_2 = p2_total
 print("Part 2: {}".format(part_2))
