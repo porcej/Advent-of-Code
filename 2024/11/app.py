@@ -4,7 +4,8 @@ def load_stones(file_path):
     try:
         with open(file_path, 'r') as file:
             line = file.read().strip()
-            stones = [int(ch) if ch.isdigit() else -1 for ch in line.split(" ")]
+            # stones = [int(ch) if ch.isdigit() else -1 for ch in line.split(" ")]
+            stones = map(int, line.split(' '))
         return stones
 
     except FileNotFoundError:
@@ -17,17 +18,22 @@ def load_stones(file_path):
 def blink(stones):
     new_stones = []
     for sdx, stone in enumerate(stones):
+        stone_str = str(stone)
         # Rules
-        pass
+        if stone == 0:
+            new_stones.append(1)
+        elif len(stone_str) % 2 == 0:
+            midpoint = len(stone_str) // 2
+            new_stones.append(int(stone_str[:midpoint]))
+            new_stones.append(int(stone_str[midpoint:]))
+        else:
+            new_stones.append(stone * 2024)
 
     return new_stones
-
 
 def part_one(stones, blinks=25):
     for bdx in range(blinks):
         stones = blink(stones)
-
-    
     return len(stones)
 
 
@@ -37,7 +43,7 @@ def part_two(stones):
 
 
 if __name__ == "__main__":
-    file_path = "example.txt"
+    # file_path = "example.txt"
     file_path = "example2.txt"
     file_path = "input.txt"
 
